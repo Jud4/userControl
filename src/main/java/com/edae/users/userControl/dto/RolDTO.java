@@ -1,9 +1,7 @@
 package com.edae.users.userControl.dto;
 
-import java.io.Serializable;
 
-public class RolDTO implements Serializable {
-    private static final long serialVersionUID = 786546548674712000L;
+public class RolDTO {
     private Integer id;
     private String name;
 

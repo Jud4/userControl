@@ -2,11 +2,13 @@ package com.edae.users.userControl.domain.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "user_table")
+public class User implements Serializable {
+    private static final long serialVersionUID = 786546549636765400L;
     @Id
     @SequenceGenerator(name = "user_seq",sequenceName = "user_seq",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "user_seq")
@@ -16,6 +18,12 @@ public class User {
     private String email;
     @Column(name = "created_at",columnDefinition = "TIMESTAMP")
     private LocalDateTime createdAt;
+
+    @OneToOne(targetEntity = UserDetail.class,mappedBy = "user",fetch = FetchType.LAZY)
+    private UserDetail userDetail;
+
+    public User() {
+    }
 
     public Long getId() {
         return id;
@@ -55,5 +63,13 @@ public class User {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public UserDetail getUserDetail() {
+        return userDetail;
+    }
+
+    public void setUserDetail(UserDetail userDetail) {
+        this.userDetail = userDetail;
     }
 }

@@ -2,11 +2,13 @@ package com.edae.users.userControl.domain.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "user_detail")
-public class UserDetail {
+public class UserDetail implements Serializable {
+    private static final long serialVersionUID = 786546548674765400L;
     @Id
     @SequenceGenerator(name = "user_detail_seq",sequenceName = "user_detail_seq",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "user_detail_seq")

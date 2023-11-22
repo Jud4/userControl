@@ -2,9 +2,12 @@ package com.edae.users.userControl.domain.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "rol")
-public class Rol {
+public class Rol implements Serializable {
+    private static final long serialVersionUID = 786546548674712000L;
     @Id
     @SequenceGenerator(name = "rol_seq",sequenceName = "rol_seq",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "rol_seq")
