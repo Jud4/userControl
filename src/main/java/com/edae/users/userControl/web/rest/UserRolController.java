@@ -2,6 +2,7 @@ package com.edae.users.userControl.web.rest;
 
 import com.edae.users.userControl.dto.UserRolDTO;
 import com.edae.users.userControl.services.UserRolService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,11 +16,16 @@ public class UserRolController {
         this.userRolService = userRolService;
     }
     @PostMapping
-    public List<UserRolDTO> addRolesToUser(@RequestBody final List<UserRolDTO> roles,
+    public ResponseEntity<List<UserRolDTO>> addRolesToUser(@RequestBody final List<UserRolDTO> roles,
                                            @PathVariable final Long userId){
         if(roles.isEmpty()){
             throw new IllegalArgumentException("Invalid Request: The body must contain one item at least");
         }
-        return userRolService.save(roles, userId);
+        return ResponseEntity.ok().body(userRolService.save(roles, userId));
+    }
+    @PatchMapping("/{id}/noActive")
+    public ResponseEntity<UserRolDTO> editActiveStatus(@PathVariable final Integer id,
+                                                       @PathVariable final Long userId){
+        return ResponseEntity.ok().body(userRolService.deactivate(userId,id));
     }
 }

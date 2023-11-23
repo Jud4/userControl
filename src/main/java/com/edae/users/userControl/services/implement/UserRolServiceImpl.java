@@ -42,4 +42,16 @@ public class UserRolServiceImpl implements UserRolService {
                 .stream()
                 .map(userRolMapper::toDto).toList();
     }
+
+    @Override
+    public UserRolDTO deactivate(Long userId, Integer id) {
+        UserRol userRol = userRolRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("There is not any UserRol with ID: "+id));
+        if(userRol.getUser().getId() != userId){
+            throw new IllegalArgumentException("This User doesn't contain the requested role");
+        }
+        userRol.setActive(false);
+        userRol = userRolRepository.save(userRol);
+        return userRolMapper.toDto(userRol);
+    }
 }

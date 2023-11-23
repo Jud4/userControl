@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface UserRolService {
     List<UserRolDTO> save(List<UserRolDTO> dtos,Long userId);
+    UserRolDTO deactivate(Long userId,Integer id);
 }
