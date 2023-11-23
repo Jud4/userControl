@@ -19,7 +19,7 @@ public class User implements Serializable {
     @Column(name = "created_at",columnDefinition = "TIMESTAMP")
     private LocalDateTime createdAt;
 
-    @OneToOne(targetEntity = UserDetail.class,mappedBy = "user",fetch = FetchType.LAZY)
+    @OneToOne(targetEntity = UserDetail.class,mappedBy = "user",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private UserDetail userDetail;
 
     public User() {

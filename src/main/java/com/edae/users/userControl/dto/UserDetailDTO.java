@@ -1,11 +1,18 @@
 package com.edae.users.userControl.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 
+@Getter
+@Setter
 public class UserDetailDTO {
     private String firstName;
     private String lastName;
     private Integer age;
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate birthDay;
 
     public UserDetailDTO() {
@@ -15,38 +22,6 @@ public class UserDetailDTO {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-        this.birthDay = birthDay;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public LocalDate getBirthDay() {
-        return birthDay;
-    }
-
-    public void setBirthDay(LocalDate birthDay) {
         this.birthDay = birthDay;
     }
 }

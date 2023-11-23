@@ -2,7 +2,9 @@ package com.edae.users.userControl.services.mapper;
 
 import com.edae.users.userControl.domain.entities.UserDetail;
 import com.edae.users.userControl.dto.UserDetailDTO;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserDetailMapper implements CustomMapper<UserDetailDTO, UserDetail>{
     @Override
     public UserDetailDTO toDto(UserDetail userDetail) {
