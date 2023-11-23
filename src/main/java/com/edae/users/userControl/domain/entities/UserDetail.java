@@ -21,7 +21,7 @@ public class UserDetail implements Serializable {
     @Column(name = "birth_day",columnDefinition = "Date")
     private LocalDate birthDay;
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User user;
 
     public Long getId() {

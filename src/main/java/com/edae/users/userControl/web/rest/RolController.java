@@ -28,9 +28,9 @@ public class RolController {
                 .body(rolService.getRolById(id).orElseThrow(() -> new IllegalArgumentException("Rol not found, exception for the id: " + id)));
     }
     @PostMapping
-    public ResponseEntity<RolDTO> create(@RequestBody final RolDTO dto) throws URISyntaxException {
+    public ResponseEntity<RolDTO> createRol(@RequestBody final RolDTO dto) throws URISyntaxException {
         if (dto.getId() != null) {
-            throw new IllegalArgumentException("I new student cannot already have an id.");
+            throw new IllegalArgumentException("I new rol cannot already have an id.");
         }
 
         RolDTO createdRol = rolService.save(dto);
