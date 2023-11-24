@@ -1,0 +1,15 @@
+server:
+    port: 8082
+
+spring:
+    datasource:
+        url: jdbc:postgresql://localhost:5432/qa_roles_user
+        username: postgres
+        password: v1o2c3a4
+    jpa:
+        show-sql: true
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+    flyway:
+        locations: classpath:db/migration
