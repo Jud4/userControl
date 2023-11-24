@@ -1,8 +1,11 @@
 package com.edae.users.userControl.dto;
 
 
+import jakarta.validation.constraints.NotBlank;
+
 public class RolDTO {
     private Integer id;
+    @NotBlank(message = "Name is mandatory")
     private String name;
 
     public RolDTO() {
