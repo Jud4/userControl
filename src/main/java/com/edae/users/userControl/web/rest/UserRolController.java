@@ -1,7 +1,9 @@
 package com.edae.users.userControl.web.rest;
 
 import com.edae.users.userControl.dto.UserRolDTO;
+import com.edae.users.userControl.exceptions.BadArgsException;
 import com.edae.users.userControl.services.UserRolService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,10 +18,10 @@ public class UserRolController {
         this.userRolService = userRolService;
     }
     @PostMapping
-    public ResponseEntity<List<UserRolDTO>> addRolesToUser(@RequestBody final List<UserRolDTO> roles,
+    public ResponseEntity<List<UserRolDTO>> addRolesToUser(@Valid @RequestBody final List<UserRolDTO> roles,
                                            @PathVariable final Long userId){
         if(roles.isEmpty()){
-            throw new IllegalArgumentException("Invalid Request: The body must contain one item at least");
+            throw new BadArgsException("Invalid Request: The body must contain one item at least");
         }
         return ResponseEntity.ok().body(userRolService.save(roles, userId));
     }
