@@ -1,9 +1,14 @@
 package com.edae.users.userControl.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class CreateUserDTO{
     private Long id;
+    @NotBlank(message = "Username is mandatory")
     private String username;
+    @NotBlank(message = "Password is mandatory")
     private String password;
+    @NotBlank(message = "Email is mandatory")
     private String email;
 
     public CreateUserDTO() {

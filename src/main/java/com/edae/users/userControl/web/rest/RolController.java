@@ -1,7 +1,9 @@
 package com.edae.users.userControl.web.rest;
 
 import com.edae.users.userControl.dto.RolDTO;
+import com.edae.users.userControl.exceptions.BadArgsException;
 import com.edae.users.userControl.services.RolService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,12 +27,12 @@ public class RolController {
     @GetMapping("/{id}")
     public ResponseEntity<RolDTO> getRolById(@PathVariable final Integer id){
         return ResponseEntity.ok()
-                .body(rolService.getRolById(id).orElseThrow(() -> new IllegalArgumentException("Rol not found, exception for the id: " + id)));
+                .body(rolService.getRolById(id).orElseThrow(() -> new BadArgsException("Rol not found, exception for the id: " + id)));
     }
     @PostMapping
-    public ResponseEntity<RolDTO> createRol(@RequestBody final RolDTO dto) throws URISyntaxException {
+    public ResponseEntity<RolDTO> createRol(@Valid @RequestBody final RolDTO dto) throws URISyntaxException {
         if (dto.getId() != null) {
-            throw new IllegalArgumentException("I new rol cannot already have an id.");
+            throw new BadArgsException("I new rol cannot already have an id.");
         }
 
         RolDTO createdRol = rolService.save(dto);
@@ -38,14 +40,14 @@ public class RolController {
         return ResponseEntity.created(new URI("/v1/roles/"+createdRol.getId())).body(createdRol);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<RolDTO> editRol(@RequestBody final RolDTO dto,
+    public ResponseEntity<RolDTO> editRol(@Valid @RequestBody final RolDTO dto,
                                           @PathVariable final Integer id){
         if (dto.getId() == null) {
-            throw new IllegalArgumentException("Invalid Rol id, null value not allowed");
+            throw new BadArgsException("Invalid Rol id, null value not allowed");
         }
 
         if (!Objects.equals(id, dto.getId())) {
-            throw new IllegalArgumentException("Invalid id");
+            throw new BadArgsException("Invalid id");
         }
 
         return ResponseEntity.ok().body(rolService.save(dto));

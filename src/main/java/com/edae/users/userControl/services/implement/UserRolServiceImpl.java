@@ -3,6 +3,7 @@ package com.edae.users.userControl.services.implement;
 import com.edae.users.userControl.domain.entities.User;
 import com.edae.users.userControl.domain.entities.UserRol;
 import com.edae.users.userControl.dto.UserRolDTO;
+import com.edae.users.userControl.exceptions.BadArgsException;
 import com.edae.users.userControl.repositories.UserRepository;
 import com.edae.users.userControl.repositories.UserRolRepository;
 import com.edae.users.userControl.services.UserRolService;
@@ -27,7 +28,7 @@ public class UserRolServiceImpl implements UserRolService {
     @Override
     public List<UserRolDTO> save(List<UserRolDTO> dtos, Long idUser) {
         User user = userRepository.findById(idUser)
-                .orElseThrow(()->new IllegalArgumentException("There is not any User with ID: "+ idUser));
+                .orElseThrow(()->new BadArgsException("There is not any User with ID: "+ idUser));
 
         List<UserRol> userRoles = dtos
                 .stream()
@@ -46,9 +47,9 @@ public class UserRolServiceImpl implements UserRolService {
     @Override
     public UserRolDTO deactivate(Long userId, Integer id) {
         UserRol userRol = userRolRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("There is not any UserRol with ID: "+id));
+                .orElseThrow(() -> new BadArgsException("There is not any UserRol with ID: "+id));
         if(userRol.getUser().getId() != userId){
-            throw new IllegalArgumentException("This User doesn't contain the requested role");
+            throw new BadArgsException("This User doesn't contain the requested role");
         }
         userRol.setActive(false);
         userRol = userRolRepository.save(userRol);
