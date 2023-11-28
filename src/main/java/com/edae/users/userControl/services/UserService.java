@@ -10,6 +10,5 @@ public interface UserService {
     List<UserDTO> listDetailUsers();
     CreateUserDTO save(CreateUserDTO dto);
     UserDTO saveDetailed(UserDTO dto);
-    CreateUserDTO editUser(UserDTO dto);
     void deleteUser(Long id);
 }

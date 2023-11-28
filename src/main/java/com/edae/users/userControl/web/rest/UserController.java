@@ -50,7 +50,7 @@ public class UserController {
         return ResponseEntity.created(new URI("/v1/users/"+createdUser.getId())).body(createdUser);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<CreateUserDTO> editUser(@Valid @RequestBody final UserDTO dto,
+    public ResponseEntity<UserDTO> editUser(@Valid @RequestBody final UserDTO dto,
                                             @PathVariable final Long id){
         if (dto.getId() == null) {
             throw new BadArgsException("Invalid User id, null value not allowed");
@@ -60,7 +60,7 @@ public class UserController {
             throw new BadArgsException("Invalid id");
         }
 
-        return ResponseEntity.ok().body(userService.editUser(dto));
+        return ResponseEntity.ok().body(userService.saveDetailed(dto));
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable final Long id){
