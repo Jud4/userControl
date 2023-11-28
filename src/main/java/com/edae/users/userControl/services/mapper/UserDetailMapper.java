@@ -9,6 +9,7 @@ public class UserDetailMapper implements CustomMapper<UserDetailDTO, UserDetail>
     @Override
     public UserDetailDTO toDto(UserDetail userDetail) {
         UserDetailDTO dto = new UserDetailDTO();
+        dto.setId(userDetail.getId());
         dto.setAge(userDetail.getAge());
         dto.setBirthDay(userDetail.getBirthDay());
         dto.setFirstName(userDetail.getFirstName());
@@ -19,6 +20,7 @@ public class UserDetailMapper implements CustomMapper<UserDetailDTO, UserDetail>
     @Override
     public UserDetail toEntity(UserDetailDTO dto) {
         UserDetail userDetail = new UserDetail();
+        userDetail.setId(dto.getId());
         userDetail.setAge(dto.getAge());
         userDetail.setBirthDay(dto.getBirthDay());
         userDetail.setFirstName(dto.getFirstName());

@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO saveDetailed(UserDTO dto) {
-        User user = userRepository.save(userMapper.toEntity(dto));
+        User user = userRepository.save(userMapper.toDetailedEntity(dto));
 
         if(dto.getDetails()!= null){
             UserDetail userDetail = userDetailMapper.toEntity(dto.getDetails());
@@ -60,13 +60,7 @@ public class UserServiceImpl implements UserService {
             userDetailRepository.save(userDetail);
         }
 
-        return userMapper.toDto(user);
-    }
-
-    @Override
-    public CreateUserDTO editUser(UserDTO dto) {
-        User user = userRepository.save(userMapper.toEntity(dto));
-        return userMapper.toCreatedDTO(user);
+        return userMapper.toDetailedDTO(user);
     }
 
     @Override

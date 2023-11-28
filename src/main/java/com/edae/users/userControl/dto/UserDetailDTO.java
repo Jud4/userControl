@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class UserDetailDTO {
+    private Long id;
     @NotBlank(message = "Firstname is mandatory")
     private String firstName;
     @NotBlank(message = "Lastname is mandatory")
@@ -21,7 +22,8 @@ public class UserDetailDTO {
     public UserDetailDTO() {
     }
 
-    public UserDetailDTO(String firstName, String lastName, Integer age, LocalDate birthDay) {
+    public UserDetailDTO(Long id,String firstName, String lastName, Integer age, LocalDate birthDay) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
